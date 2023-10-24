@@ -22,7 +22,8 @@ gs.prototype.device = function(device) {
 };
 
 gs.prototype.executePath = function(path) {
-  this._path = path
+  this._path = path;
+  return this;
 };
 
 gs.prototype.exec = function(callback) {
