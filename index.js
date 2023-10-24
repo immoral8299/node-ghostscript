@@ -32,7 +32,7 @@ gs.prototype.exec = function(callback) {
   if (!this._input) return callback("Please specify input");
 
   var args = this.options.concat([this._input]).join(' ');
-  var executePath = this._path ? this._path + '/' : ''
+  var executePath = this._path ? this._path + '/./' : ''
   exec(`${executePath}gs ` + args, function(err, stdout, stderr) {
     callback(err, stdout, stderr);
   });
