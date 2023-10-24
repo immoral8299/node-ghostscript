@@ -7,6 +7,7 @@ var create = function() {
 var gs = function() {
   this.options = [];
   this._input = null;
+  this._path = null
 };
 
 gs.prototype.batch = function() {
@@ -20,13 +21,18 @@ gs.prototype.device = function(device) {
   return this;
 };
 
+gs.prototype.executePath = function(path) {
+  this._path = path
+};
+
 gs.prototype.exec = function(callback) {
   var self = this;
 
   if (!this._input) return callback("Please specify input");
 
   var args = this.options.concat([this._input]).join(' ');
-  exec('gs ' + args, function(err, stdout, stderr) {
+  var executePath = this._path ? this._path + '/' : ''
+  exec(`${executePath}gs ` + args, function(err, stdout, stderr) {
     callback(err, stdout, stderr);
   });
 };
